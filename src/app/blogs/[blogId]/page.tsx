@@ -1,5 +1,20 @@
 import BlogDetailsCard from '@/components/ui/BlogDetailsCard';
 
+export const generateStaticParams = async () => {
+  // SSG (Static Site Generation) is a method of pre-rendering pages at build time. This means that the HTML for the page is generated when you build your application, rather than on each request. This can improve performance and SEO, as the HTML is ready to be served to the client.
+  return [
+    {
+      blogId: '1',
+    },
+    {
+      blogId: '2',
+    },
+    {
+      blogId: '3',
+    },
+  ];
+};
+
 const BlogDetailsPage = async ({
   params,
 }: {
