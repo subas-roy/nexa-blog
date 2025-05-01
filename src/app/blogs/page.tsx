@@ -1,15 +1,25 @@
+'use client';
 import BlogCard from '@/components/ui/BlogCard';
+import Spinner from '@/components/ui/Spinner';
+import { useGetBlogsQuery } from '@/redux/apis/blogs.slice';
 import { Blog } from '@/types';
-import { Metadata } from 'next';
+// import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'NexaBlog | Blogs',
-};
+// export const metadata: Metadata = {
+//   title: 'NexaBlog | Blogs',
+// };
 
-const BlogsPage = async () => {
-  const res = await fetch('http://localhost:5000/blogs', { cache: 'no-store' }); // SSR (Server Side Rendering) fetch data on every request. This is useful when you want to fetch data that changes frequently or when you want to ensure that the data is always up to date.
-  const blogs = await res.json();
+const BlogsPage = () => {
+  // const res = await fetch('http://localhost:5000/blogs', { cache: 'no-store' }); // SSR (Server Side Rendering) fetch data on every request. This is useful when you want to fetch data that changes frequently or when you want to ensure that the data is always up to date.
+  // const blogs = await res.json();
   // console.log(blogs);
+
+  const { data: blogs, isLoading } = useGetBlogsQuery({});
+  // console.log(data, isLoading);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="w-[90%] mx-auto">
